@@ -76,8 +76,10 @@ app.use('*', async (c, next) => {
 });
 
 // ═══════════════════════════════════════════════════
-// HEALTH & STATUS
+// ROOT & HEALTH & STATUS
 // ═══════════════════════════════════════════════════
+app.get('/', (c) => json({ service: 'echo-documents', version: '1.0.0', status: 'operational' }));
+
 app.get('/health', async (c) => {
   let dbOk = false;
   try { await c.env.DB.prepare('SELECT 1').first(); dbOk = true; } catch {}
